@@ -25,10 +25,9 @@ SECRET_KEY = 'b_k+6%ry)+e1+at=8cxbnk=ox3pl40jc4qk+fydry)0b#*cp7u'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-ALLOWED_HOSTS = ['pharm-plus.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
 DEBUG = True
-
 
 # Application definition
 
@@ -141,9 +140,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIR = [
-    os.path.join(BASE_DIR, 'product_app/static')
-]
+STATICFILES_DIR = [os.path.join(BASE_DIR, 'product_app/static')]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

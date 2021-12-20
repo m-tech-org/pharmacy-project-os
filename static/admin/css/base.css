@@ -150,7 +150,7 @@ pre.literal-block {
 }
 
 code strong {
-    color: #930;
+    color: rgba(128, 71, 43, 0.377);
 }
 
 hr {
@@ -581,7 +581,7 @@ ul.messagelist li.error {
 ul.errorlist {
     margin: 0 0 4px;
     padding: 0;
-    color: #ba2121;
+    color: #4e3b3b;
     background: #fff;
 }
 

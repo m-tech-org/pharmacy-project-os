@@ -1,7 +1,7 @@
 html,body {
     position: relative;
     overflow-x: hidden;
-    background:  url('/static/images/img6.jpg');
+    background:  url('/static/images/img3.jpg');
     width: 100% !important;
     height: 100vh;
     display: table;
@@ -27,7 +27,7 @@ form {
 }
 
 .navbar {
-    background-color: #800020;
+    background-color: #08070a;
 }
 
 .navbar li a {

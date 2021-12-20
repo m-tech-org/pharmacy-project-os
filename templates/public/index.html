@@ -1,0 +1,38 @@
+{% extends 'public/base.html'%} {% block content%}
+<br></br>
+
+<div class = "container">
+  <h1 class= "text-center">PRODUCTS IN STOCK</h1>
+  <br>
+
+  <div class = "container">
+    <form action = "" method = "GET">
+      {{product_filters.form}}
+      <input type = "submit" value = "Search Products" class="btn btn-secondary btn"/>
+    </form>
+  </div>
+
+  <br>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Product Name</th>
+        <th scope="col">Category</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Availability</th>
+      </tr>
+    </thead>
+    {% for product in products%}
+    <tbody>
+      <tr>    
+        <td>{{product.item_name}}</td>
+        <td>{{product.category_name}}</td>
+        <td>{{product.total_quantity}}</td>
+        <td>{{product.availability}}</td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+
+</div>
+{% endblock%}

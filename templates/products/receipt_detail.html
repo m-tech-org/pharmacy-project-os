@@ -14,12 +14,12 @@
             <table class="table table-sm">
               <thead>
                 <tr>
-                  <td><strong>Item Name</strong></td>
-                  <td class="text-xs-center"><strong>Item Quantity</strong></td>
-                  <td class="text-xs-right"><strong>Total Bill(₦)</strong></td>
-                  <td class="text-xs-right"><strong>Amount Paid(₦)</strong></td>
+                  <td><strong>Product Name</strong></td>
+                  <td class="text-xs-center"><strong>Product Quantity</strong></td>
+                  <td class="text-xs-right"><strong>Total Bill(৳)</strong></td>
+                  <td class="text-xs-right"><strong>Amount Paid(৳)</strong></td>
                   <td class="text-xs-right">
-                    <strong>Total change(₦)</strong>
+                    <strong>Total change(৳)</strong>
                   </td>
                 </tr>
               </thead>
@@ -27,9 +27,9 @@
                 <tr>
                   <td>{{receipt.item| title}}</td>
                   <td class="text-xs-center">{{receipt.quantity }}</td>
-                  <td class="text-xs-center">₦{{receipt.get_total | title}}</td>
-                  <td class="text-xs-right">₦{{ receipt.amount_received }}</td>
-                  <td class="text-xs-right">₦{{ receipt.get_change }}</td>
+                  <td class="text-xs-center">৳{{receipt.get_total | title}}</td>
+                  <td class="text-xs-right">৳{{ receipt.amount_received }}</td>
+                  <td class="text-xs-right">৳{{ receipt.get_change }}</td>
                 </tr>
               </tbody>
             </table>

@@ -11,18 +11,23 @@ def home(request):
     product_filters = ProductFilter(request.GET, queryset = products)
     products = product_filters.qs
 
-    return render(request, 'products/index.html', {
-        'products': products, 'product_filters': product_filters,
-    })
+    return render(request, 'products/index.html', {'products': products, 'product_filters': product_filters,})
 
+def dashboard(request):
+    products = Product.objects.all().order_by('-id')
+    product_filters = ProductFilter(request.GET, queryset = products)
+    products = product_filters.qs
+
+    return render(request, 'public/index.html', {'products': products, 'product_filters': product_filters,})
+
+def product_detail(request, product_id):
+    product = Product.objects.get(id = product_id)
+    return render(request, 'public/index.html', {'product': product})
 
 @login_required
 def receipt(request): 
     sales = Sale.objects.all().order_by('-id')
-    return render(request, 
-    'products/receipt.html', 
-    {'sales': sales,
-    })
+    return render(request, 'products/receipt.html', {'sales': sales,})
 
 
 def all_sales(request):
@@ -30,13 +35,9 @@ def all_sales(request):
     total  = sum([items.amount_received for items in sales])
     change = sum([items.get_change() for items in sales])
     net = total - change
-    return render(request, 'products/all_sales.html',
-     {
-     'sales': sales, 
-     'total': total,
-     'change': change, 
-     'net': net,
-      })
+    return render(request, 'products/all_sales.html',{
+     'sales': sales, 'total': total, 'change': change, 'net': net,
+    })
 
 
 @login_required
@@ -73,10 +74,7 @@ def issue_item(request, pk):
 
             return redirect('receipt') 
 
-    return render (request, 'products/issue_item.html',
-     {
-    'sales_form': sales_form,
-    })
+    return render (request, 'products/issue_item.html',{'sales_form': sales_form,})
     
 
 @login_required
@@ -96,3 +94,12 @@ def add_to_stock(request, pk):
             return redirect('home')
 
     return render (request, 'products/add_to_stock.html', {'form': form})
+
+@login_required
+def new_stock(request):
+    form = AddForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            return redirect('home')
+
+    return render (request, 'products/new_stock.html', {'form': form})

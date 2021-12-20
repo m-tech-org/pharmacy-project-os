@@ -13,9 +13,9 @@
     </thead>  
     <tbody>
       <tr>    
-        <td>₦{{total}}</td>
-        <td>₦{{change}}</td>
-        <td>₦{{net}}</td>
+        <td>৳{{total}}</td>
+        <td>৳{{change}}</td>
+        <td>৳{{net}}</td>
       </tr>
     </tbody>
   </table>
@@ -27,9 +27,9 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col">Customer name</th>
-        <th scope="col">Item Bought</th>
+        <th scope="col">Product Bought</th>
         <th scope="col">Quantity</th>
-        <th scope="col">Unit Price(₦)</th>
+        <th scope="col">Unit Price($)</th>
         <th scope="col">Total Cost</th>
         <th scope="col">Amount Paid</th>
         <th scope="col">Change Collected</th>
@@ -41,10 +41,10 @@
         <td>{{sale.issued_to | title}}</td>
         <td>{{sale.item | title}}</td>
         <td>{{sale.quantity}}</td>
-        <td>₦{{sale.unit_price}}</td>
-        <td>₦{{sale.get_total}}</td>
-        <td>₦{{sale.amount_received}}</td>
-        <td>₦{{sale.get_change}}</td>
+        <td>৳{{sale.unit_price}}</td>
+        <td>৳{{sale.get_total}}</td>
+        <td>৳{{sale.amount_received}}</td>
+        <td>৳{{sale.get_change}}</td>
       </tr>
     </tbody>
     {% endfor %}
