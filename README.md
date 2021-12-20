@@ -44,15 +44,3 @@ $ python manage.py runserver
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
