@@ -32,14 +32,14 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+     'django.contrib.admin',
+     'django.contrib.auth',
+     'django.contrib.contenttypes',
+    # 'django.contrib.sessions',
+     'django.contrib.messages',
+    # 'django.contrib.staticfiles',
     'product_app',
-    'crispy_forms',
+    #'crispy_forms',
     'django_filters'
 ]
 
@@ -52,6 +52,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 ROOT_URLCONF = 'pharmacy_project.urls'
@@ -79,27 +82,34 @@ WSGI_APPLICATION = 'pharmacy_project.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.mysql',
+         'NAME': 'pharmdb',
+         'USER': 'admin',
+         'PASSWORD': '1234',
+         'HOST': 'localhost',
+         'PORT': '3306',
+        # 'OPTIONS': {
+        #     'autocommit': True,
+        #     },
+     }
+
     # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'pharmacy',
-    #     'USER': 'postgres',
-    #     'PASSWORD': '1234',
-    #     'HOST': 'localhost',
-    #     'PORT': '5432',
+    # 'ENGINE': 'django.db.backends.sqlite3',
+    # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
 
-    'default': {
-    'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 }
 
-}
-
-
+print(DATABASES)
+'''
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+print(db_from_env)
 
+#DATABASES['default'].update(db_from_env)
+print(DATABASES)
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

@@ -1,9 +1,9 @@
+from django.db.models.fields import CharField
 from django.shortcuts import render, redirect
-from product_app.forms import AddForm, SaleForm
-from product_app.models import Product,Sale
+from product_app.forms import AddForm, SaleForm, newProductForm
+from product_app.models import Product, Sale, newProduct
 from django.contrib.auth.decorators import login_required
 from product_app.filters import ProductFilter
-
 
 # Create your views here.
 def home(request):
@@ -12,6 +12,7 @@ def home(request):
     products = product_filters.qs
 
     return render(request, 'products/index.html', {'products': products, 'product_filters': product_filters,})
+  
 
 def dashboard(request):
     products = Product.objects.all().order_by('-id')
@@ -23,6 +24,7 @@ def dashboard(request):
 def product_detail(request, product_id):
     product = Product.objects.get(id = product_id)
     return render(request, 'public/index.html', {'product': product})
+
 
 @login_required
 def receipt(request): 
@@ -50,7 +52,6 @@ def product_detail(request, product_id):
 def receipt_detail(request, receipt_id):
     receipt = Sale.objects.get(id = receipt_id)
     return render(request, 'products/receipt_detail.html', {'receipt': receipt})
-
 
 @login_required
 def issue_item(request, pk):
@@ -84,7 +85,7 @@ def add_to_stock(request, pk):
 
     if request.method == 'POST':
         if form.is_valid():
-            added_quantity = int(request.POST['received_quantity'])
+            added_quantity = int(request.POST['recdcceived_quantity'])
             issued_item.total_quantity += added_quantity
             issued_item.save()
 
@@ -97,9 +98,18 @@ def add_to_stock(request, pk):
 
 @login_required
 def new_stock(request):
-    form = AddForm(request.POST)
+    new_item = newProduct.objects.all()
+    form = newProductForm(request.POST)
+
     if request.method == 'POST':
         if form.is_valid():
+            new_item.item_name = CharField(request.POST['item_name'])
+            new_item.category_name = CharField(request.POST['category_name'])
+            new_item.quantity = int(request.POST['quantity'])
+            new_item.unit_price = int(request.POST['unit_price'])
+
             return redirect('home')
 
     return render (request, 'products/new_stock.html', {'form': form})
+
+ 

@@ -10,3 +10,9 @@ class SaleForm(ModelForm):
     class Meta:
         model = Sale
         fields = ["quantity", "amount_received", "issued_to"]
+
+class newProductForm(ModelForm):
+    class Meta:
+        model = newProduct
+        fields = ["item_name", "category_name", "quantity", "unit_price"]
+    
