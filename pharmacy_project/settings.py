@@ -35,12 +35,12 @@ INSTALLED_APPS = [
      'django.contrib.admin',
      'django.contrib.auth',
      'django.contrib.contenttypes',
-    # 'django.contrib.sessions',
+     'django.contrib.sessions',
      'django.contrib.messages',
-    # 'django.contrib.staticfiles',
-    'product_app',
-    #'crispy_forms',
-    'django_filters'
+     'django.contrib.staticfiles',
+     'product_app',
+    # 'crispy_forms',
+     'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -85,31 +85,22 @@ DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.mysql',
          'NAME': 'pharmdb',
-         'USER': 'admin',
-         'PASSWORD': '1234',
+         'USER': 'root',
+         'PASSWORD': '',
          'HOST': 'localhost',
          'PORT': '3306',
-        # 'OPTIONS': {
-        #     'autocommit': True,
-        #     },
      }
-
-    # 'default': {
-    # 'ENGINE': 'django.db.backends.sqlite3',
-    # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
-
 }
 
 print(DATABASES)
-'''
+
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
-print(db_from_env)
+#print(db_from_env)
 
-#DATABASES['default'].update(db_from_env)
-print(DATABASES)
-'''
+DATABASES['default'].update(db_from_env)
+#print(DATABASES)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

@@ -1,61 +1,60 @@
-from django.db import models
-from django.utils import timezone
+from django.db import connection
 
 # Create your models here.
-class Category(models.Model):
-    name = models.CharField(max_length = 50, null = True, blank = True)
 
-    def __str__(self):
-        return self.name
+create_user_table_query = """
+CREATE TABLE pharmacist (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    password VARCHAR(100)
+)
+"""
+
+create_category_table_query = """
+CREATE TABLE category(
+    name VARCHAR(100) NOT NULL
+    
+)
+"""
+
+create_product_table_query = """
+CREATE TABLE product(
+    p_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    category_name VARCHAR(100) NOT NULL,
+    issued_quantity INT NOT NULL,
+    received_quantity INT NOT NULL,
+    unit_price INT NOT NULL
+)
+"""
+
+create_sale_table_query = """
+CREATE TABLE sale(
+    quantity INT NOT NULL,
+    amount_received INT NOT NULL,
+    issued_to VARCHAR(100) NOT NULL,
+    unit_price INT NOT NULL,
+    product_id INT NOT NULL,
+    FOREIGN KEY (product_id)
+    REFERENCES product (p_id)
+)
+"""
+
+# create_newProduct_table_query = """
+# CREATE TABLE newproduct(
+#     p_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+#     product_name VARCHAR(100),
+#     category_name VARCHAR(100),
+#     received_quantity INT,
+#     unit_price INT,
+# )
+# """
+
+with connection.cursor() as cursor:
+    cursor.execute(create_user_table_query)
+    cursor.execute(create_category_table_query)
+    cursor.execute(create_product_table_query)
+    cursor.execute(create_sale_table_query)
+    #cursor.execute(create_newProduct_table_query)
+    connection.commit()
      
-
-class Product(models.Model):
-    item_name = models.CharField(max_length = 50, null = True, blank = True)
-    category_name = models.CharField(max_length = 50, null = True, blank = True)
-    total_quantity = models.IntegerField(default = 0, null = True, blank = True)
-    issued_quantity = models.IntegerField(default = 0, null = True, blank = True)
-    received_quantity = models.IntegerField(default = 0, null = True, blank = True)
-    unit_price = models.IntegerField(default = 0, null = True, blank = True)
-
-
-    def availability(self):
-        if self.total_quantity >0:
-            self.availability = 'Yes'
-            return self.availability
-        elif self.total_quantity <=0:
-            self.availability = 'No'
-            return self.availability
-
-    def __str__(self):
-        return self.item_name
-
-class Sale(models.Model):
-    item = models.ForeignKey(Product, on_delete = models.CASCADE)
-    quantity = models.IntegerField(default = 0, null = True, blank = True)
-    amount_received = models.IntegerField(default = 0, null = True, blank = True)
-    issued_to = models.CharField(max_length = 50, null = True, blank = True)
-    unit_price = models.IntegerField(default = 0, null = True, blank = True)
-
-    def get_total(self):
-        total = self.quantity * self.item.unit_price
-        return int(total)
-    
-    def get_change(self):
-        change = self.get_total() - self.amount_received
-        return abs(int(change))
-    
-    def __str__(self):
-        return self.item.item_name
-
-class newProduct(models.Model):
-    item_name = models.CharField(max_length = 50, null = True, blank = True)
-    category_name = models.CharField(max_length = 50,null = True, blank = True )
-    quantity = models.IntegerField(default = 0, null = True, blank = True)
-    unit_price = models.IntegerField(default = 0, null = True, blank = True)
-
-    class Meta:  
-        db_table = "newproduct"
-    
-    def __str__(self):
-        return self.item_name
-

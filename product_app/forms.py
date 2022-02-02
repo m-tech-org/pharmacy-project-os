@@ -1,18 +1,22 @@
-from django.forms import ModelForm
+from django import forms
 from .models import *
 
-class AddForm(ModelForm):
-    class Meta:
-        model = Product
-        fields = ['received_quantity']
+class AddForm(forms.Form):
+    # specify fields for model
+    received_quantity = forms.CharField()
 
-class SaleForm(ModelForm):
-    class Meta:
-        model = Sale
-        fields = ["quantity", "amount_received", "issued_to"]
+class SaleForm(forms.Form):
+    # specify fields for model
+    quantity = forms.IntegerField()
+    amount_received = forms.IntegerField()
+    issued_to = forms.CharField()
+    
 
-class newProductForm(ModelForm):
-    class Meta:
-        model = newProduct
-        fields = ["item_name", "category_name", "quantity", "unit_price"]
+class newProductForm(forms.Form):
+    # specify fields for model
+    item_name = forms.CharField()
+    category_name = forms.CharField()
+    quantity = forms.IntegerField()
+    unit_price = forms.IntegerField()
+
     
